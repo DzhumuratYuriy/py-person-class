@@ -13,21 +13,13 @@ def create_person_list(people: list) -> list:
     person_list = [Person(person["name"], person["age"]) for person in people]
     name_map = {p.name: p for p in person_list}
     for person in people:
-        wife_name = person.get("wife")
-        if wife_name is not None:
-            spouse = name_map.get(wife_name)
-            if spouse is not None:
-                obj = name_map[person["name"]]
-                obj.wife = spouse
-            else:
-                continue
-    for person in people:
-        husband_name = person.get("husband")
-        if husband_name is not None:
-            spouse = name_map.get(husband_name)
-            if spouse is not None:
-                obj = name_map[person["name"]]
-                obj.husband = spouse
-            else:
-                continue
+        obj = name_map[person["name"]]
+        wife = person.get("wife")
+        husband = person.get("husband")
+        if wife is not None and name_map[wife] is not None:
+            obj.wife = name_map[wife]
+        elif husband is not None and name_map[husband] is not None:
+            obj.husband = name_map[husband]
+        else:
+            continue
     return person_list
