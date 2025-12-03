@@ -16,9 +16,9 @@ def create_person_list(people: list) -> list:
         obj = name_map[person["name"]]
         wife = person.get("wife")
         husband = person.get("husband")
-        if wife is not None and name_map[wife] is not None:
+        if wife is not None and wife is name_map:
             obj.wife = name_map[wife]
-        elif husband is not None and name_map[husband] is not None:
+        elif husband is not None and husband is name_map:
             obj.husband = name_map[husband]
         else:
             continue
